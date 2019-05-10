@@ -1,7 +1,7 @@
-import db from '../services/MySQLHandler';
+import imageQuery from '../models/query/imageQuery';
 
 const imageParam = (req, res, next, image) => {
-  db.query(`SELECT * FROM photos WHERE name = ?`, [image], (err, images) => {
+  imageQuery.selectWithName([image], (err, images) => {
     if (err || !images.length) {
       return res.status(404).end();
     }
